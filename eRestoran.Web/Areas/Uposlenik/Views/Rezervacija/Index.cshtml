@@ -1,0 +1,108 @@
+﻿@using eRestoran.Contracts.Responses
+@model PagedResponse<RezervacijaResponse>
+
+<div class="wrapper">
+    <form asp-action="Index">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" style="color:slategray" aria-label="Previous" asp-route-page="@Model.FirstPage">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                @if (Model.PreviousPage != null)
+                {
+                    <li class="page-item">
+                        <a class="page-link"  asp-route-page="@Model.PreviousPage" >
+                            @Model.PreviousPage
+                        </a>
+                    </li>
+                }
+                <li class="page-item active"><a class="page-link" style="background-color:slategray; color:white;border:1px solid slategray"> @Model.PageNumber </a></li>
+                @if (Model.NextPage != null)
+                {
+                    <li class="page-item">
+                        <a class="page-link" style="color:slategray" asp-route-page="@Model.NextPage">
+                            @Model.NextPage
+                        </a>
+                    </li>
+                }
+                <li class="page-item">
+                    <a class="page-link" style="color:slategray" asp-route-page="@Model.LastPage">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Datum
+                    </th>
+                    <th>
+                        Telefon
+                    </th>
+                    <th>
+                        Broj mjesta
+                    </th>
+                    <th>
+                        Korisnik
+                    </th>
+                    <th>
+                        Uposlenik
+                    </th>
+                    <th>
+                        Akcije
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Data)
+                {
+                    <tr>
+                        <td>
+                            @item.DatumVrijemeRezervacije
+                        </td>
+                        <th>
+                            @item.Telefon
+                        </th>
+                        <th>
+                            @item.BrojMjesta
+                        </th>
+                        <td>
+                            @item.Korisnik.Ime @item.Korisnik.Prezime
+                        </td>
+                        <td>
+                            @if (item.Uposlenik != null)
+                            {
+                                @item.Uposlenik.Ime @item.Uposlenik.Prezime
+                            }
+                        </td>
+                        <td>
+                            @if (item.Uposlenik == null)
+                            {
+                                <a class="btn btn-outline-success"
+                                   asp-area="Uposlenik" asp-controller="Rezervacija" asp-action="RezervacijaOdobri" asp-route-id="@item.ID">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm10.03 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
+                                    </svg>
+                                </a>
+                                <a class="btn btn-outline-danger"
+                                   asp-area="Uposlenik" asp-controller="Rezervacija" asp-action="RezervacijaOdbij" asp-route-id="@item.ID">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                                    </svg>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>

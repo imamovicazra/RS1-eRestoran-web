@@ -1,0 +1,13 @@
+﻿<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Meni
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @foreach (var kategorija in Model)
+        {
+            <a class="dropdown-item" asp-controller="Jelo" asp-action="Prikaz"
+               asp-route-category="@kategorija.Naziv">@kategorija.Naziv</a>
+        }
+        <a class="dropdown-item" asp-controller="Jelo" asp-action="Prikaz" asp-route-category="">Cjelokupna ponuda</a>
+    </div>
+</li>

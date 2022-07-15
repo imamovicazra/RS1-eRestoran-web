@@ -1,0 +1,9 @@
+﻿@{
+    Html.RenderPartial("_KorisnikNavbar");
+}
+<h1 class="text text-center" style="padding-top:5%">
+    @ViewBag.CheckoutCompleteMessage
+</h1>
+<div class="text text-center" style="width:100%; margin-left:auto;margin-right:auto">
+    <a class="btn" style="background-color:#00CC99; color:white; margin-top:15px" asp-area="Korisnik" asp-controller="Home" asp-action="Index">Vratite se na početnu</a>
+</div>

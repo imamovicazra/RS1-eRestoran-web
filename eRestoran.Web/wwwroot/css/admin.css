@@ -1,0 +1,43 @@
+﻿.wrapper {
+    width: 80%;
+    margin: 2rem auto 5rem auto;
+}
+
+nav {
+    display: flex
+}
+
+.spacer {
+    flex: 1;
+}
+
+#jelo-upsert {
+    display: flex;
+    gap: 10rem;
+}
+
+.image-wrapper, .info-wrapper, .role-wrapper {
+    width: 50%;
+    height: 20rem;
+}
+
+#slika {
+    width: 100%;
+    height: 90%;
+}
+
+form {
+    display: flex;
+    gap: 10%;
+}
+
+.wrapper-column {
+    width: 40%;
+    margin: 2rem auto 5rem auto;
+    display: flex;
+    flex-direction: column;
+}
+
+span.uloga {
+    font-size: 1.2rem;
+}

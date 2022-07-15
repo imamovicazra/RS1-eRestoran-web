@@ -1,0 +1,34 @@
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" style="color:#00CC99;margin-right:0px">e</a><a class="navbar-brand">Restoran</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="Korisnik" asp-controller="Home" asp-action="Index">Početna <span class="sr-only">(current)</span></a>
+            </li>
+            @await Component.InvokeAsync("KategorijeMenuKorisnik")
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Korisnik" asp-controller="Rezervacija" asp-action="Index">Rezervacije</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Korisnik" asp-controller="Favoriti" asp-action="Index">Favoriti</a>
+            </li>
+
+        </ul>
+        <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:gray">
+                Postavke
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" asp-area="Korisnik" asp-controller="Korisnik" asp-action="PromjenaPodataka">Promjena podataka</a>
+                <a class="dropdown-item" asp-area="Korisnik" asp-controller="Korisnik" asp-action="PromjenaSifre">Promjena lozinke</a>
+            </div>
+        </div>
+        <form class="form-inline my-2 my-lg-0">
+            <button class="btn my-2 my-sm-0" type="submit" style="background-color:#00CC99; color:white" asp-area="" asp-controller="Prijava" asp-action="Odjava">Odjavi se</button>
+        </form>
+    </div>
+</nav>

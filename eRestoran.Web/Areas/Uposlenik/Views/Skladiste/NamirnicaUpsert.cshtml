@@ -1,0 +1,52 @@
+﻿
+@model eRestoran.Web.Areas.Uposlenik.Models.NamirnicaUpsert;
+
+<div class="wrapper" style="width:40%; margin-top:5%">
+    <form enctype="multipart/form-data" class="ea-form" asp-action="NamirnicaSnimi">
+        <div class="form-group" hidden>
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" readonly />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Naziv" class="control-label"></label>
+            <input asp-for="Naziv" class="form-control" />
+            <span asp-validation-for="Naziv" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Kolicina" class="control-label"></label>
+            <input asp-for="Kolicina" class="form-control" type="number"/>
+            <span asp-validation-for="Kolicina" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CijenaPoKomadu" class="control-label"></label>
+            <input asp-for="CijenaPoKomadu" class="form-control"  />
+            <span asp-validation-for="CijenaPoKomadu" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="JedinicaMjere" class="control-label"></label>
+            <input asp-for="JedinicaMjere" class="form-control"/>
+            <span asp-validation-for="JedinicaMjere" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn w-100" value="Snimi" style="background-color:slategrey; color:white" />
+        </div>
+    </form>
+</div>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#slika').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $("#upload").change(function () {
+        readURL(this);
+    });
+</script>

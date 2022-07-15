@@ -1,0 +1,54 @@
+﻿@{
+    Html.RenderPartial("_KorisnikNavbar");
+}
+@using eRestoran.Web.Areas.Korisnik.Models
+@model NarudzbaPlacanjeVM
+<style>
+    .narudzba {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2%;
+    }
+
+    .btn-dark {
+        width: 100%;
+        background-color: grey;
+    }
+</style>
+
+<div style="width:80%; margin-left:auto; margin-right:auto; margin-top:20px">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 100%; background-color: #00CC99" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</div>
+<form name="myForm" asp-area="Korisnik" asp-controller="Narudzba" asp-action="Placanje" method="post" class="narudzba">
+    <h3>Izaberite način plaćanja: </h3> <br />
+    <input hidden asp-for="NarudzbaID" />
+    <input type="radio" name="nazivPlacanja" asp-for="NazivPlacanja" value="Pouzećem" onclick="zatvori()"  /> Plaćanje pouzećem <br /> <br />
+    <input type="radio" name="nazivPlacanja" asp-for="NazivPlacanja" value="Karticom" onclick="otvori()" checked/> Kartično plaćanje <br /> <br />
+    <div id="myDiv">
+        <label asp-for="BrojKartice">Broj kreditne kartice</label> <br />
+        <input id="BrojKartice" asp-for="BrojKartice" class="form-control" />
+        <span asp-validation-for="BrojKartice" class="text-danger"></span> <br />
+        <label asp-for="CVV">CVV</label> <br />
+        <input name="CVV" asp-for="CVV" class="form-control" />
+        <span asp-validation-for="CVV" class="text-danger"></span> <br /> <br />
+    </div>
+    <input class="btn" type="submit" value="Zaključi narudžbu" style="width:100%; background-color:#00CC99; color:white" />
+
+</form>
+
+<script>
+  
+    function otvori() {
+        $('#myDiv').show();
+    }
+    function zatvori() {
+        $('#myDiv').hide();
+    }
+    
+    
+
+</script>
+

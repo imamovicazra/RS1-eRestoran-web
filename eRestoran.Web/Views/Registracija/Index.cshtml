@@ -1,0 +1,56 @@
+﻿@{
+    string error = (String)TempData["error_message"];
+    Html.RenderPartial("_GuestNavbar");
+}
+
+@model eRestoran.Contracts.Requests.RegisterRequest
+
+<style>
+    .prijava {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2%;
+        border: 1px solid #FF6666;
+        border-radius: 4%;
+        padding: 40px;
+    }
+
+    .btn-dark {
+        width: 100%;
+        background-color:grey;
+    }
+</style>
+
+<form action="/Registracija/Registracija" method="post" class="prijava">
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <div class="alert alert-danger alert-dismissible">
+            @error
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+    }
+
+    <label>Ime: </label>
+    <input class="form-control" asp-for="Ime" name="ime" type="text" size="20" />
+    <span asp-validation-for="Ime" class="text-danger"></span>
+    <br />
+    <label>Prezime: </label>
+    <input class="form-control" asp-for="Prezime" name="prezime" type="text" size="20" />
+    <span asp-validation-for="Prezime" class="text-danger"></span>
+    <br />
+    <label>Korisničko ime: </label>
+    <input class="form-control" asp-for="Username" name="username" type="text" size="20" />
+    <span asp-validation-for="Username" class="text-danger"></span>
+    <br />
+    <label>Email: </label>
+    <input class="form-control" asp-for="Email" name="email" type="text" size="20" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+    <label>Lozinka: </label>
+    <input class="form-control" asp-for="Password" name="password" type="password" size="20" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+    <br />
+    <input class="btn btn-dark" style="background-color:#FF6666" type="submit" value="Registriraj se" />
+</form>
+

@@ -1,0 +1,41 @@
+﻿@{
+    Html.RenderPartial("_KorisnikNavbar");
+}
+@using eRestoran.Web.Areas.Korisnik.Models;
+@model HomeIndexVM
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<div class="text text-center" style="margin-right:0px auto;margin-left:0px auto">
+    <h2 class="text text-center" style="color:#00CC99"><b>Dobro došli!</b></h2>
+    <h3 class="text text-center" style="color:#00CC99">Sedmični favoriti</h3> <br />
+</div>
+
+<div class="container body-content">
+    <div class="row">
+        @foreach (var jelo in Model.Jela)
+        {
+            <div class="col-md-4 col-lg-4">
+                <div class="thumbnail" style="border:2px solid #00CC99	; border-radius:4px;height:490px; margin-bottom: 15px;padding:3px">
+
+                    <img src="@Url.Content("~/" + jelo.Slika)" alt=" " style="height:240px;width:100%" />
+                    <div class="caption text-center" style="height:190px;">
+                        <div style="height:80px"><h2>@jelo.Naziv</h2></div>
+                        <div style="height:75px">
+                            <p>@jelo.Opis</p>
+                        </div>
+                        <div style="height:40px;">
+                            <h3>@jelo.Cijena.ToString() KM</h3>
+                        </div>
+                    </div>
+                    <p class="text text-center"><a class="btn" style=" color:white; background-color:#00CC99; margin-bottom:85px;margin-top:7px" 
+                       asp-area="Korisnik" asp-controller="KorpaStavka" asp-action="DodajUKorpu" asp-route-JeloID="@jelo.ID">Dodaj u korpu</a></p>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+<footer class="border-top footer text-muted">
+    <div class="container" style="text-align:center">
+        &copy; 2020 - eRestoran
+    </div>
+</footer>

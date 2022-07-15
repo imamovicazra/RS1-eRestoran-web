@@ -1,0 +1,58 @@
+﻿@using eRestoran.Web.Areas.Korisnik.Models;
+@model KorpaStavkaVM
+@{
+    Html.RenderPartial("_KorisnikNavbar");
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div style="width:80%; margin-left:auto; margin-right:auto; margin-top:20px">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 30%; background-color: #00CC99" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</div>
+
+<div class="row checkoutForm" style="width:70%;margin-left:auto;margin-right:auto; margin-top: 50px">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Kolicina</th>
+                <th class="text-center">Jelo</th>
+                <th class="text-center">Cijena</th>
+                <th class="text-center">Ukupno</th>
+                <th class="text-center">Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.KorpaStavke)
+            {
+                <tr>
+                    <td class="text-center">@line.Kolicina</td>
+                    <td class="text-center">@line.Jelo.Naziv</td>
+                    <td class="text-center">@line.Jelo.Cijena KM</td>
+                    <td class="text-right">
+                        @((line.Kolicina * line.Jelo.Cijena)) KM
+                    </td>
+                    <td class="text text-center"><a asp-area="Korisnik" asp-controller="KorpaStavka" asp-action="UkloniIzKorpe" asp-route-JeloID="@line.JeloID"><i class="fa fa-trash-o" style="font-size:30px;color:red"></i></a>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total:</td>
+                <td class="text-right">
+                    @Model.KorpaUkupno KM
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <a class="btn" style="color:white; background-color:#00CC99" asp-area="Korisnik" asp-controller="Jelo" asp-action="Lista" asp-route-category="">Dodaj novo jelo</a>
+    @if (Model.KorpaStavke.Count() > 0)
+    {
+        <a class="btn" style="color:white; background-color: #00CC99; margin-left: 10px" asp-controller="Narudzba" asp-action="Naruci">Sljedeći korak</a>
+    }
+    else
+    {
+        <a class="btn" style="color:white; background-color: #00CC99; margin-left: 10px">Sljedeći korak</a>
+
+    }
+</div>

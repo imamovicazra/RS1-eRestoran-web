@@ -1,0 +1,130 @@
+﻿@{
+    Html.RenderPartial("_KorisnikNavbar");
+}
+@using eRestoran.Web.Areas.Korisnik.Models;
+@model JeloListaVM
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h2 class="text-center" style="color:#00CC99">Kategorija: @Model.TrenutnaKategorija</h2>
+<form class="text text-center" asp-controller="Jelo" asp-action="Lista" asp-route-category="@Model.kateg">
+    <input asp-for="Search" value="@Model.Search" />
+    <input value="@Model.kateg" asp-for="TrenutnaKategorija" hidden />
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+<hr />
+<div class="container body-content" style="padding-bottom:15px">
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" style="width:100%; margin-left:auto; margin-right:auto" >
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous" style="color:#00CC99" asp-route-page="@Model.Content.FirstPage" asp-route-search="@Model.Search">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            @if (Model.Content.PreviousPage != null)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-route-page="@Model.Content.PreviousPage" asp-route-search="@Model.Search">
+                        @Model.Content.PreviousPage
+                    </a>
+                </li>
+            }
+            <li class="page-item active"><a class="page-link" style="background-color:#00CC99; color:white; border: 1px solid #00CC99"> @Model.Content.PageNumber </a></li>
+            @if (Model.Content.NextPage != null)
+            {
+                <li class="page-item">
+                    <a class="page-link" style="color:#00CC99" asp-route-page="@Model.Content.NextPage" asp-route-search="@Model.Search">
+                        @Model.Content.NextPage
+                    </a>
+                </li>
+            }
+            <li class="page-item">
+                <a class="page-link" style="color:#00CC99" asp-route-page="@Model.Content.LastPage" asp-route-search="@Model.Search">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="row" style="padding-bottom:40px;">
+        @foreach (var jelo in Model.Content.Data.ToList())
+        {
+            <div class="col-md-4 col-lg-4">
+                <div class="thumbnail" style="border:2px solid #00CC99; border-radius:4px;height:485px; margin-bottom: 15px;padding:3px">
+
+                    <img src="@Url.Content("~/" + jelo.Slika)" alt=" " style="height:230px;width:100%" />
+                    <div class="caption text-center" style="height:190px;">
+                        <div style="height:80px"><h2>@jelo.Naziv</h2></div>
+                        <div style="height:75px">
+                            <p>@jelo.Opis</p>
+                        </div>
+                        <div style="height:40px;" >
+                            <h3>@jelo.Cijena.ToString() KM</h3>
+                        </div>
+                    </div>
+                    <div class="container" style="margin-top:10px">
+                        <div class="row">
+                            @if (!jelo.isLiked)
+                            {
+                                <div class="col-3">
+                                    <i class="fa fa-heart-o" aria-hidden="true" style="font-size:40px;" id="@jelo.ID"></i>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-3">
+                                    <i class="fa fa-heart" aria-hidden="true" style="font-size:40px; color:red" id="@jelo.ID"></i>
+                                </div>
+                            }
+                            <div class="col-9">
+                                <a class="btn" style="color:white; background-color:#00CC99; margin-bottom:5px" id="cartButton"
+                                   asp-area="Korisnik" asp-controller="KorpaStavka" asp-action="DodajUKorpu" asp-route-JeloID="@jelo.ID">Dodaj u korpu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    
+</div>
+<script>
+    const buttons = document.querySelectorAll("i")
+    for (const button of buttons) {
+        button.addEventListener('click', function (event) {
+
+            let element = $(event.target);
+            if (element.hasClass("liked")) {
+                var url = "/Korisnik/Jelo/Dislike?JeloID=" + event.target.id;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    success: function () {
+                        element.css("color", "");
+                        element.removeClass("liked");
+                        element.removeClass("fa-heart");
+                        element.addClass("fa-heart-o");
+                    }
+
+                });
+            }
+            else {
+                var url = "/Korisnik/Jelo/Like?JeloID=" + event.target.id;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    success: function () {
+                        element.css("color", "red");
+                        element.addClass("liked");
+                        element.addClass("fa-heart");
+                        element.removeClass("fa-heart-o");
+                    }
+                });
+            }
+        })
+    }
+</script>

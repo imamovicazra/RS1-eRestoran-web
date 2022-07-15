@@ -1,0 +1,37 @@
+﻿@using eRestoran.Domain
+@model Rezervacija
+
+@{
+    Html.RenderPartial("_KorisnikNavbar");
+}
+
+<style>
+    .rezervacija {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 4%;
+    }
+
+    .btn-dark {
+        width: 100%;
+        background-color: grey;
+    }
+</style>
+
+<form asp-area="Korisnik" asp-controller="Rezervacija" asp-action="Rezervisi" method="post" class="rezervacija">
+
+    <label asp-for="DatumVrijemeRezervacije"></label> <br>
+    <input type="datetime-local" asp-for="DatumVrijemeRezervacije" class="form-control" />
+    <span asp-validation-for="DatumVrijemeRezervacije" class="text-danger"></span> <br />
+
+
+    <label asp-for="Telefon" ></label> <br />
+    <input asp-for="Telefon" class="form-control" />
+    <span asp-validation-for="Telefon" class="text-danger"></span> <br /> <br />
+
+    <label asp-for="BrojMjesta">Broj mjesta</label> <br />
+    <input asp-for="BrojMjesta" class="form-control" />
+    <span asp-validation-for="BrojMjesta" class="text-danger"></span> <br /> <br />
+    <input class="btn" type="submit" value="Rezerviši" style="width:100%; background-color: #00CC99; color:white" />
+</form>

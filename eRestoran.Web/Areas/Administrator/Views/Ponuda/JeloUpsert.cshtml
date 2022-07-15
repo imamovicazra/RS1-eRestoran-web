@@ -1,0 +1,62 @@
+﻿@{
+    Layout = "_Layout";
+}
+@model eRestoran.Web.Areas.Administrator.Models.JeloUpsert;
+
+<div class="wrapper">
+    <form enctype="multipart/form-data" class="ea-form" id="jelo-upsert" asp-action="JeloSnimi">
+        <div class="image-wrapper">
+            <label asp-for="Slika" class="control-label"></label>
+            <img id="slika" src="@Url.Content("~/" + @Model.Slika)" />
+            <input asp-for="Slika" type="file" id="upload" />
+            <span asp-validation-for="Slika" class="text-danger"></span>
+        </div>
+        <div class="info-wrapper">
+            <div class="form-group" hidden>
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" class="form-control" readonly />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Naziv" class="control-label"></label>
+                <input asp-for="Naziv" class="form-control" />
+                <span asp-validation-for="Naziv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Opis" class="control-label"></label>
+                <textarea asp-for="Opis" class="form-control"></textarea>
+                <span asp-validation-for="Opis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cijena" class="control-label"></label>
+                <input asp-for="Cijena" class="form-control" type="number"/>
+                <span asp-validation-for="Cijena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KategorijaID" class="control-label"></label>
+                <select asp-for="KategorijaID" asp-items="Model.Kategorije" class="form-control"></select>
+                <span asp-validation-for="KategorijaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary w-100" value="Snimi" />
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#slika').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
+
+    $("#upload").change(function () {
+        readURL(this);
+    });
+</script>

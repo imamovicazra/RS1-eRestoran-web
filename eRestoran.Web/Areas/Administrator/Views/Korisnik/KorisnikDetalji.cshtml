@@ -1,0 +1,56 @@
+﻿@model eRestoran.Web.Areas.Administrator.Models.KorisnikDetalji
+
+<div class="wrapper">
+    <form enctype="multipart/form-data" class="ea-form" asp-action="KorisnikSnimi">
+        <div class="info-wrapper">
+            <div class="form-group" hidden>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" readonly />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ime" class="control-label"></label>
+                <input asp-for="Ime" class="form-control" readonly/>
+                <span asp-validation-for="Ime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prezime" class="control-label"></label>
+                <input asp-for="Prezime" class="form-control" readonly />
+                <span asp-validation-for="Prezime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GradID" class="control-label"></label>
+                <select asp-for="GradID" asp-items="Model.Gradovi" class="form-control" disabled></select>
+                <span asp-validation-for="GradID" class="text-danger"></span>
+            </div>
+            
+        </div>
+        <div class="role-wrapper">
+            @for(int i = 0; i < Model.TrenutneUloge.Count(); i++)
+            {
+                <input asp-for="@Model.TrenutneUloge[i]" hidden />
+            }
+            <h4>Uloge</h4>
+            <hr />
+            @for (int i = 0; i < Model.SveUloge.Count(); i++)
+            {
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="@Model.SveUloge[i].Id" hidden />
+                        <input asp-for="@Model.SveUloge[i].Name" hidden />
+                        <input type="checkbox" asp-for="@Model.SveUloge[i].IsSelected" /> 
+                        <span class="uloga">@Model.SveUloge[i].Name</span>
+                    </label>
+                </div>
+             }
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary w-100" value="Snimi" />
+            </div>
+        </div>
+</form>
+</div>

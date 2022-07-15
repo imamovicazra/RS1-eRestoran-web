@@ -1,0 +1,66 @@
+﻿
+@model eRestoran.Web.Areas.Uposlenik.Models.NarudzbaUredi
+
+<div class="wrapper-column">
+    <div class="form-group">
+        <label asp-for="KorisnikImePrezime" class="control-label"></label>
+        <input asp-for="KorisnikImePrezime" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="DatumNarudzbe" class="control-label"></label>
+        <input asp-for="DatumNarudzbe" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Adresa" class="control-label"></label>
+        <input asp-for="Adresa" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="Telefon" class="control-label"></label>
+        <input asp-for="Telefon" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label asp-for="UposlenikImePrezime" class="control-label"></label>
+        <input asp-for="UposlenikImePrezime" class="form-control" readonly />
+    </div>
+</div>
+<div class="wrapper-w60">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Jelo
+                </th>
+                <th>
+                    Količina
+                </th>
+                <th>
+                    Cijena
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.NarudzbaDetalji)
+            {
+                <tr>
+                    <td>
+                        @item.Jelo.Naziv
+                    </td>
+                    <td>
+                        @item.Kolicina
+                    </td>
+                    <td>
+                        @item.Cijena KM
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (Model.StatusDostaveID == 3)
+    {
+        <div class="buttons">
+            <a class="btn btn-success" asp-action="OdobriNarudzbu" asp-route-id="@Model.ID">Odobri</a>
+            <a class="btn btn-danger" asp-action="OdbijNarudzbu" asp-route-id="@Model.ID">Odbij</a>
+        </div>
+    }
+</div>

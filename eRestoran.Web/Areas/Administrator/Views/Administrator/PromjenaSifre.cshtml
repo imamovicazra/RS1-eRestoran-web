@@ -1,0 +1,19 @@
+﻿@model eRestoran.Web.Areas.Administrator.Models.PromjenaSifre
+
+<div class="wrapper"  style="padding-top:50px">
+    <form class="ea-form wrapper-column" method="post" asp-action="SnimiSifru">
+        <div class="form-group">
+            <label asp-for="StaraSifra" class="control-label">Stara lozinka</label>
+            <input asp-for="StaraSifra" class="form-control" type="password" />
+            <span asp-validation-for="StaraSifra" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NovaSifra" class="control-label">Nova lozinka</label>
+            <input asp-for="NovaSifra" class="form-control" type="password" />
+            <span asp-validation-for="NovaSifra" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-secondary w-100" value="Snimi" />
+        </div>
+    </form>
+</div>

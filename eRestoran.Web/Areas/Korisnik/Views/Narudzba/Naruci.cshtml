@@ -1,0 +1,40 @@
+﻿@using eRestoran.Domain;
+@model Narudzba
+@{
+    Html.RenderPartial("_KorisnikNavbar");
+}
+<style>
+    .narudzba {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 4%;
+    }
+
+    .btn-dark {
+        width: 100%;
+        background-color: grey;
+    }
+</style>
+
+<div style="width:80%; margin-left:auto; margin-right:auto; margin-top:20px">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 60%; background-color: #00CC99" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</div>
+<form asp-area="Korisnik"  asp-controller="Narudzba" asp-action="Naruci" method="post" class="narudzba">
+
+
+    <label asp-for="Adresa"></label> <br />
+    <input asp-for="Adresa" class="form-control" />
+    <span asp-validation-for="Adresa" class="text-danger"></span> <br />
+           
+      
+    <label asp-for="Telefon"></label>  <br />
+    <input asp-for="Telefon" class="form-control" />
+    <span asp-validation-for="Telefon" class="text-danger"></span> <br /> <br />
+    <input class="btn" type="submit" value="Sljedeći korak" style="width:100%; background-color: #00CC99; color: white" />
+    @*<input class="btn btn-default" type="submit" value="Return " />*@
+           
+ </form>
+

@@ -1,0 +1,45 @@
+﻿@{
+    string error = (String)TempData["error_message"];
+    Html.RenderPartial("_GuestNavbar");
+}
+
+
+@model eRestoran.Contracts.Requests.LoginRequest
+
+<style>
+    .prijava {
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 9%;
+        border: 1px solid #FF6666;
+        border-radius: 4%;
+        padding: 40px;
+    }
+
+    .btn-dark {
+        width: 100%;
+        background-color: grey;
+    }
+</style>
+
+<form action="/Prijava/Prijava" class="prijava">
+    @if (!string.IsNullOrEmpty(error))
+    {
+        <div class="alert alert-danger alert-dismissible">
+            @error
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+    }
+
+    <label>Email: </label>
+    <input class="form-control" asp-for="Email" name="email" type="text" size="20" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+    <br />
+    <label>Lozinka: </label>
+    <input class="form-control" asp-for="Password" name="password" type="password" size="20" />
+    <span asp-validation-for="Password" class="text-danger"></span> <br />
+    <p class="text text-center"><a asp-controller="Registracija" asp-action="Index" style="color:gray;">Nemate profil? Registrirajte se</a></p>
+    <input class="btn btn-dark" style="background-color:#FF6666" type="submit" value="Prijavi se" />
+</form>
+
